@@ -5,7 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ru.productstar.servlets.model.Expense;
+import ru.productstar.servlets.enums.TypeTransaction;
+import ru.productstar.servlets.model.Transaction;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,9 +20,9 @@ public class SummaryServlet extends HttpServlet {
         var salary = Integer.parseInt(context.getInitParameter("salary"));
         var rent = Integer.parseInt(config.getInitParameter("rent"));
         context.setAttribute("freeMoney", salary - rent);
-        List<Expense> expenses = new ArrayList<>();
-        expenses.add(new Expense("rent", rent));
-        context.setAttribute("expenses", expenses);
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(new Transaction("rent", rent, TypeTransaction.INCOME));
+        context.setAttribute("transactions", transactions);
     }
 
     @Override
